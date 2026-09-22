@@ -13,7 +13,12 @@ The engineering template is v5 `trial-4x2` at
 [`d611e62`](https://github.com/BarryLee911/tt-gf-ucl-project-v5/commit/d611e620a799619f136ed79b17ad873b106b6530).
 The original v5 repository is retained separately; its `main` is the older 3x4 design.
 
-One local level-5 real-divider test passed for this exact source. Current v6 cloud
-RTL, GDS, precheck, and functional gate-level results are reported by Actions.
-No SDF simulation is included. The v5 SS setup violation is historical and must
-be reassessed from the new build; area reduction has not yet been measured.
+The two counters now use one reset-priority assignment each, preserving their
+increment and hold conditions. Local RTL equivalence and freshly synthesized GF180
+functional gate-level checks each passed 460,637 cycles for this source, including
+real divider levels 0, 1 and 5. See the verification record for tool versions and scope.
+
+Cloud RTL, GDS, precheck and functional gate-level results are reported by Actions.
+No SDF simulation is included. The previous v6 build had a gate-level startup X
+failure and SS setup slack of -8.757775 ns; the new physical results must be checked
+separately. Physical area reduction and SS timing closure are not claimed.

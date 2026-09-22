@@ -201,6 +201,24 @@ module tt_um_sine_area_detector #(
     assign handoff_active = frontend_run && config_latched_valid && !output_ready;
     assign handoff_due = (handoff_count == HANDOFF_LAST);
 
+    /* Counter updates: one assignment with reset, increment, hold priority.
+     * Case comparisons preserve the original if behavior for X/Z enables. */
+    wire history_count_enable;
+    wire handoff_count_enable;
+    assign history_count_enable =
+        ((frontend_run && take_sample) === 1'b1);
+    assign handoff_count_enable =
+        ((handoff_active && (handoff_due !== 1'b1)) === 1'b1);
+
+    always @(posedge clk) begin
+        history_pointer <=
+            (rst_n === 1'b0) ? 11'd0 :
+            history_count_enable ? history_pointer + 11'd1 : history_pointer;
+        handoff_count <=
+            (rst_n === 1'b0) ? 17'd0 :
+            handoff_count_enable ? handoff_count + 17'd1 : handoff_count;
+    end
+
     /* Sequential updates: reset and each update have disjoint flat guards.
      * Outputs read old backend state: a sample can appear from N+2. */
     always @(posedge clk) begin
@@ -210,12 +228,10 @@ module tt_um_sine_area_detector #(
             config_latched_valid <= 1'b0;
             prescale_terminal_latched <= 27'd0;
             prescale_count <= 27'd0;
-            history_pointer <= 11'd0;
             sample_valid <= 1'b0;
             sample_magnitude <= 8'd0;
             sample_overlap <= 1'b0;
             sample_position <= 11'd0;
-            handoff_count <= 0;
             output_ready <= 1'b0;
             output_data <= 11'd0;
             output_kind <= 1'b0;
@@ -233,14 +249,10 @@ module tt_um_sine_area_detector #(
             sample_magnitude <= adc_magnitude;
             sample_overlap <= overlap_bit;
             sample_position <= history_pointer;
-            history_pointer <= history_pointer + 11'd1;
         end
 
         if (handoff_active && handoff_due)
             output_ready <= 1'b1;
-
-        if (handoff_active && (handoff_due !== 1'b1))
-            handoff_count <= handoff_count + 1'b1;
 
         if (frontend_run) begin
             sample_valid <= take_sample;
