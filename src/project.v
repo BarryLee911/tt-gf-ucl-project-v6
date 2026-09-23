@@ -262,11 +262,18 @@ module tt_um_sine_area_detector #(
         end
     end
 
+    /* Area state has one assignment with reset, process, hold priority.
+     * Known-one guards preserve the procedural behavior for X/Z controls. */
+    always @(posedge clk) begin
+        running_sum <=
+            (stats_reset === 1'b1) ? 12'd0 :
+            ((backend_process === 1'b1) ? slide_sum_next : running_sum);
+    end
+
     /* Backend reset and processing are mutually exclusive, including X/Z.
      * History bits are not reset; window_full masks unwritten entries. */
     always @(posedge clk) begin
         if (stats_reset) begin
-            running_sum <= 12'd0;
             window_full <= 1'b0;
             peak_first <= 8'd0;
             peak_second <= 8'd0;
@@ -280,7 +287,6 @@ module tt_um_sine_area_detector #(
 
         if (backend_process) begin
             overlap_history <= {overlap_history[2046:0], sample_overlap};
-            running_sum <= slide_sum_next;
             peak_first <= peak_first_next;
             peak_second <= peak_second_next;
             peak_buffer <= sample_magnitude;

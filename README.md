@@ -17,7 +17,10 @@ checks, unchanged-level regression and the independent pin-only cocotb tests.
 GitHub's RTL workflow repeats the level-23 test; the official gate test retains
 its existing levels 0/1/5 and receives the corrected reference-model divisor.
 
-The previous commit passed official functional gate testing, but its worst SS setup
-slack was -9.011503 ns. This revision requires fresh physical results; area reduction
-and SS timing closure are not claimed. No SDF simulation or relaxed timing constraints
+The current change gives the area accumulator one reset/process/hold assignment.
+Local mapped-gate regression passes 460,637 cycles with explicit reset checks for
+23 state signals (187 bits), and the three real level-23 samples are revalidated.
+The preceding f4eab5f build failed GL startup with running_sum[0] unknown; the older
+0b3e894 build passed GL but had worst SS setup slack -9.011503 ns. This source needs
+a new official cloud GL result. Area reduction and SS timing closure are not claimed. No SDF simulation or relaxed timing constraints
 are added. FPGA remains manual.

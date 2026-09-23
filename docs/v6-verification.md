@@ -1,6 +1,57 @@
 # v6 source and verification record
 
-## Current revision: binary level 23 (2026-09-23)
+## Current revision: area accumulator reset priority (2026-09-23)
+
+- RTL SHA256: `E070E8658952FF7314BFD6CE7E69E035233953CCCED5E57FA44714AE7D9F2FE2`.
+- Parent: `f4eab5fe2214a925f541d9353d56f529aaaa1713`.
+- Only running_sum assignment structure changes: one nonblocking assignment with
+  reset, process, hold priority. Known-one guards retain procedural X/Z behavior.
+- Keep level-23 divisor 8388608 and terminal 8388607, the counter reset fixes,
+  ports, parameters, widths, algorithms, latency and GF180 / 4x2 / 80 MHz / AREA 0.
+- No forced initialization, hand-edited mapped gates, keep/dont_touch attributes,
+  or timing-constraint changes. Existing test algorithms and CI entries are unchanged.
+
+### Actual checks of this source
+
+| Check | Result |
+|---|---|
+| Icarus 12/13 compilation and wait parameters 80000/1/8/131072 | PASS |
+| Original unchanged-level tests and frozen v4/v5 comparisons | PASS, 2294295 v5 pin comparisons |
+| Independent cocotb levels 0/1/5, reset, saturation, expiry, refill, tie and contention | PASS, 460637 cycles |
+| Before/after RTL all pins and running_sum compared every cycle | PASS, 460637 cycles |
+| Level 23, three full real divider intervals, no forced state | PASS, 25166114 checked cycles |
+| Level-23 sample edges after configuration | 8388608 / 16777216 / 25165824 |
+| Newly mapped GF180 gate netlist against independent pin vectors | PASS, 460637 cycles |
+| Explicit reset checks for 23 state signals / 187 bits | PASS, 14 frontend and 14 delayed-backend reset checks |
+| Negative control: identical reset checks on unchanged failing f4eab5f cloud netlist | Rejected at cycle 2: running_sum[0]=X |
+
+The 2048-bit overlap history remains intentionally unreset and is masked by window_full.
+Pin X/Z, contention, mismatches, missing required coverage or waveforms fail the checks.
+Snapshots, testbenches, vectors, logs, results and FST waves are retained locally.
+Level 23 ran on Icarus 12 for 252.77 seconds: three samples, not a full
+2048-sample reference period. Icarus 13 was used for compilation. The gate run used
+Icarus 12; its source and freshly synthesized netlist were not force-initialized.
+
+Mapped netlist SHA256: `C4841590DAC999D55902FC565A43A259D5D9A6920200D06E10F2645FFB47A016`.
+Local synthesis uses Yosys 0.62 / 7326bb7d6 and the prior LibreLane command-sequence
+translation with built-in opt, the filtered GF180 liberty, AREA 0 ABC script and
+12.5 ns constraint. This is not the full GitHub/Nix physical flow or a claim of
+byte-identical cloud mapping. A fresh official cloud GL result is still required.
+
+### Previous cloud failure and current status
+
+The [f4eab5f cloud build](https://github.com/BarryLee911/tt-gf-ucl-project-v6/actions/runs/35849624767)
+passed RTL (including level 23), GDS generation and precheck but failed functional GL
+at 75 ns, before legal configuration. Its running_sum[0] reset feedback propagated X.
+The earlier 0b3e894 counter-reset build passed GL; that does not validate this source.
+The new source has local validation above; cloud GL, physical area and timing results
+are pending a new build. No SDF test is added and no timing constraint is relaxed.
+
+---
+
+All records below are historical, including statements about pending cloud runs.
+
+## Historical revision: binary level 23 (2026-09-23)
 
 - RTL SHA256: `E92D83617654FAFDB5C712BAE716938EEE275F5C86534E40D0021E3301213B9F`.
 - Parent revision: `0b3e8946b57d24e7b2ec09fbf51dab8bb728a8b3`; its RTL SHA256 was
