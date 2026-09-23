@@ -19,7 +19,7 @@ module tt_um_sine_area_detector #(
     wire adc_sign;
     assign adc_sign = (ui_in >= 8'h80);
 
-    /* Levels 0-22: binary division; level 23: 0.5 mHz at 80 MHz. */
+    /* Levels 0-23: binary division; level 23: about 4.6566 mHz at 80 MHz. */
     reg [4:0] config_level;
     reg       config_valid;
 
@@ -39,7 +39,7 @@ module tt_um_sine_area_detector #(
     reg       config_latched_valid;
 
     /*
-     * Sample every 2^level clocks; level 23 uses 78,125,000 clocks.
+     * Sample every 2^level clocks, including level 23.
      */
     reg  [26:0] prescale_count;
     wire        divider_expired;
@@ -48,7 +48,6 @@ module tt_um_sine_area_detector #(
     reg [26:0] prescale_terminal_latched;
     wire [26:0] config_terminal;
     assign config_terminal =
-        (config_level == 5'd23) ? 27'd78124999 :
         (27'd1 << config_level) - 27'd1;
     assign divider_expired =
         (prescale_count == prescale_terminal_latched);

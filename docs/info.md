@@ -6,7 +6,7 @@ At 80 MHz, the design counts sign matches over the last 2048 samples and estimat
 
 Apply an 80 MHz clock and hold `rst_n=0` for four rising edges before reading results. Set `uio[4:0]` before releasing reset. The first legal level (0–23) is latched once; reset is required to reconfigure. Levels 24–31 wait for a legal value.
 
-Levels 0–22 sample every `2^level` clocks, giving a reference frequency of `80,000,000 / (2048 * 2^level)` Hz. Level 23 samples every 78,125,000 clocks for a 0.5 mHz reference. Sampling begins one full divider interval after latching.
+Levels 0–23 sample every `2^level` clocks, giving a reference frequency of `80,000,000 / (2048 * 2^level)` Hz. Level 23 samples every 8,388,608 clocks (104.8576 ms at 80 MHz), giving approximately 4.6566 mHz; its reference period is 214.7483648 seconds. Sampling begins one full divider interval after latching.
 
 Drive ADC codes on `ui[7:0]`. The reference sign is low for 1024 samples, then high for 1024. Area is the count of equal signs, clipped to 2047. Peak is `abs(ADC-128)` in ADC counts, with a maximum code of 128.
 

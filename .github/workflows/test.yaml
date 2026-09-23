@@ -3,6 +3,7 @@ on: [push, workflow_dispatch]
 jobs:
   test:
     runs-on: ubuntu-24.04
+    timeout-minutes: 45
     steps:
       - name: Checkout repo
         uses: actions/checkout@v6
@@ -30,6 +31,9 @@ jobs:
           make
           # make will return success even if the test fails, so check for failure in the results.xml
           ! grep failure results.xml
+
+      - name: Level 23 real divider (three samples, RTL only)
+        run: python test/run_level23.py --source src/project.v --output test/output/level23
 
       - name: Test Summary
         uses: test-summary/action@v2.4

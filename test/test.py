@@ -40,7 +40,7 @@ class Reference:
                 self.cover['illegal_level'] += 1
         else:
             self.elapsed += 1
-            divisor = 78125000 if self.level == 23 else 2 ** self.level
+            divisor = 2 ** self.level
             if self.elapsed % divisor == 0:
                 self.pending = adc
                 self.samples += 1

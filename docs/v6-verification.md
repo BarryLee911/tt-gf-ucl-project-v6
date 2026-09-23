@@ -1,6 +1,57 @@
 # v6 source and verification record
 
-## Current revision: counter reset priority (2026-09-22)
+## Current revision: binary level 23 (2026-09-23)
+
+- RTL SHA256: `E92D83617654FAFDB5C712BAE716938EEE275F5C86534E40D0021E3301213B9F`.
+- Parent revision: `0b3e8946b57d24e7b2ec09fbf51dab8bb728a8b3`; its RTL SHA256 was
+  `7A9D7C5D6CDF0ABF4E5A51DBAE152718059D2807431050BA6E699761C63840B9`.
+- GF180, 4x2, 80 MHz / 12.5 ns, AREA 0; no constraint or port/parameter changes.
+- Level 23 changes from 78,125,000 to 8,388,608 clocks per sample; terminal 8,388,607.
+  All legal levels now use 2^level. Reference frequency: 4.656612873 mHz.
+- Counter widths/reset fix, other levels, algorithms and output latency are retained.
+
+### Actual local results for this SHA256
+
+| Check | Result |
+|---|---|
+| Icarus 12/13 Verilog-2001 compilation, wait values 80000/1/8/131072, level-23 testbench | PASS |
+| Level 23, Icarus 12, no forced state or accelerated sampling | PASS, 25,166,114 checked cycles, three real samples |
+| Sampling edges relative to configuration | 8,388,608 / 16,777,216 / 25,165,824 |
+| Every-cycle pins, X/Z, contention, divider, capture and pipeline checks | PASS |
+| Invalid configuration, no sampling on latch, locked level, 80000-cycle handoff, reset/reconfiguration | PASS |
+| Frozen v4/v5 comparison for unchanged levels | PASS, 2,294,295 v5 pin comparisons |
+| Literal terminal checks | PASS, levels 0–22 in legacy bench plus level 23 in dedicated bench |
+| Independent cocotb pin model, levels 0/1/5 and existing algorithm coverage | PASS, 460,637 cycles |
+| Negative control using old special-divider source | Rejected as expected: incorrect level-23 terminal |
+
+The long-divider run took 250.84 s locally. Its FST contains reset,
+handoff and sample windows; assertions run on every tested clock. Only three level-23
+samples were simulated, not a complete 2048-sample reference period. Icarus 13 was used
+for compilation, not a second complete long run. Existing levels 0/1/5 retain saturation,
+expiry, refill, tie, reset and zero/max coverage. The cocotb algorithm is unchanged;
+only its level-23 divisor expression changes. Frozen historical RTL files are not edited.
+
+A first short-regression attempt stopped because the sandbox could not read the local
+cocotb runtime. The same tests passed when run with access to that runtime. Both attempts
+and all source snapshots/logs/results/waves are retained locally; machine tools and large
+waves are not repository content.
+
+### Cloud scope
+
+The RTL workflow adds `test/run_level23.py` with the dedicated RTL-only testbench;
+the official pin-only gate tests remain levels 0/1/5. New cloud results are pending
+at commit preparation. No local synthesis, GDS, gate or SDF run is claimed for this SHA.
+The [parent cloud build](https://github.com/BarryLee911/tt-gf-ucl-project-v6/actions/runs/35716264155)
+passed RTL, GDS, precheck and functional gate tests, with worst SS setup -9.011503 ns.
+Those results are historical and do not validate the changed source. Constraints remain
+unchanged; new area and timing require the new build reports.
+
+---
+
+The following record was written at the time of the previous revisions. References to
+"current source" or pending cloud runs below belong to those historical dates and hashes.
+
+## Historical revision: counter reset priority (2026-09-22)
 
 - RTL SHA256: `7A9D7C5D6CDF0ABF4E5A51DBAE152718059D2807431050BA6E699761C63840B9`.
 - Previous RTL SHA256: `AE377AFF09D813BD63B40F847447649CF1B8930161572D1E3C979158AD3ED169`.
@@ -14,7 +65,7 @@
 - Level 23 retains its existing 78,125,000-clock divisor in this commit. The requested
   correction to 2^23 is a separate pending change, not part of this reset fix.
 
-## Checks performed for the current source
+## Checks performed for the historical counter-reset source
 
 | Check | Actual result |
 |---|---|
