@@ -1,10 +1,10 @@
 project:
-  title: "Mengrui's project v6"
+  title: "Mengrui's project v6 GF40MHz experiment"
   author: "BarryLee911"
   discord: ""
   description: "2048-sample sign overlap and approximate 1024-sample peak detector"
   language: "Verilog"
-  clock_hz: 80000000
+  clock_hz: 40000000
   tiles: "4x2"
   top_module: "tt_um_sine_area_detector"
   source_files:

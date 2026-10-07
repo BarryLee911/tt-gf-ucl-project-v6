@@ -7,6 +7,7 @@ from pathlib import Path
 import time
 import cocotb
 from cocotb.triggers import Timer
+from cocotb.utils import get_sim_time
 
 
 class Reference:
@@ -84,7 +85,9 @@ class Driver:
         self.dut = dut
         self.ref = Reference()
         self.cycles = 0
-        self.half = Timer(6250, unit='ps')
+        self.config_end_ps = None
+        self.handoff_checks = []
+        self.half = Timer(12500, unit='ps')
 
     async def cycle(self, adc=127, level=0, ena=1, reset=False, drive=True):
         d = self.dut
@@ -96,9 +99,19 @@ class Driver:
         d.external_drive0.value = int(drive)
         await self.half
         d.clk.value = 1
+        old_level, old_ready = self.ref.level, self.ref.ready
         self.ref.edge(reset, level, adc)
         await self.half
         self.cycles += 1
+        now_ps = int(get_sim_time(unit='ps'))
+        if reset:
+            self.config_end_ps = None
+        elif old_level is None and self.ref.level is not None:
+            self.config_end_ps = now_ps
+        if not old_ready and self.ref.ready:
+            wait_ps = now_ps - self.config_end_ps
+            assert wait_ps == 80000 * 25000, ('Handoff time mismatch', wait_ps)
+            self.handoff_checks.append({'level': self.ref.level, 'cycles': 80000, 'wait_ps': wait_ps})
         # Reject X/Z and check all output pins from the first reset edge.
         r = self.ref
         expected = (r.data & 255, ((r.data >> 8) << 5) | r.kind,
@@ -192,8 +205,8 @@ async def pin_interface_real_dividers(dut):
     output = Path('output')
     output.mkdir(exist_ok=True)
     (output / 'pin_checks.json').write_text(json.dumps({
-        'status': 'PASS', 'clock_hz': 80000000, 'clock_period_ns': 12.5,
-        'handoff_cycles': 80000, 'cycles': driver.cycles, 'levels': results,
+        'status': 'PASS', 'clock_hz': 40000000, 'clock_period_ns': 25.0,
+        'handoff_cycles': 80000, 'handoff_time_ms': 2.0, 'handoff_checks': driver.handoff_checks, 'cycles': driver.cycles, 'levels': results,
         'first_reset_edge': 'PASS; all output pins checked, no X/Z exception',
         'seconds': time.perf_counter() - started,
         'scope': 'v6: capture at N, process at N+1, output available N+2; unchanged sample phase.',

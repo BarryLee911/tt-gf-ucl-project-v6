@@ -1,0 +1,146 @@
+[
+  {
+    "level": 0,
+    "divisor": 1,
+    "excitation_hz": 19531.25,
+    "original_80mhz_level": 1
+  },
+  {
+    "level": 1,
+    "divisor": 2,
+    "excitation_hz": 9765.625,
+    "original_80mhz_level": 2
+  },
+  {
+    "level": 2,
+    "divisor": 4,
+    "excitation_hz": 4882.8125,
+    "original_80mhz_level": 3
+  },
+  {
+    "level": 3,
+    "divisor": 8,
+    "excitation_hz": 2441.40625,
+    "original_80mhz_level": 4
+  },
+  {
+    "level": 4,
+    "divisor": 16,
+    "excitation_hz": 1220.703125,
+    "original_80mhz_level": 5
+  },
+  {
+    "level": 5,
+    "divisor": 32,
+    "excitation_hz": 610.3515625,
+    "original_80mhz_level": 6
+  },
+  {
+    "level": 6,
+    "divisor": 64,
+    "excitation_hz": 305.17578125,
+    "original_80mhz_level": 7
+  },
+  {
+    "level": 7,
+    "divisor": 128,
+    "excitation_hz": 152.587890625,
+    "original_80mhz_level": 8
+  },
+  {
+    "level": 8,
+    "divisor": 256,
+    "excitation_hz": 76.2939453125,
+    "original_80mhz_level": 9
+  },
+  {
+    "level": 9,
+    "divisor": 512,
+    "excitation_hz": 38.14697265625,
+    "original_80mhz_level": 10
+  },
+  {
+    "level": 10,
+    "divisor": 1024,
+    "excitation_hz": 19.073486328125,
+    "original_80mhz_level": 11
+  },
+  {
+    "level": 11,
+    "divisor": 2048,
+    "excitation_hz": 9.5367431640625,
+    "original_80mhz_level": 12
+  },
+  {
+    "level": 12,
+    "divisor": 4096,
+    "excitation_hz": 4.76837158203125,
+    "original_80mhz_level": 13
+  },
+  {
+    "level": 13,
+    "divisor": 8192,
+    "excitation_hz": 2.384185791015625,
+    "original_80mhz_level": 14
+  },
+  {
+    "level": 14,
+    "divisor": 16384,
+    "excitation_hz": 1.1920928955078125,
+    "original_80mhz_level": 15
+  },
+  {
+    "level": 15,
+    "divisor": 32768,
+    "excitation_hz": 0.5960464477539062,
+    "original_80mhz_level": 16
+  },
+  {
+    "level": 16,
+    "divisor": 65536,
+    "excitation_hz": 0.2980232238769531,
+    "original_80mhz_level": 17
+  },
+  {
+    "level": 17,
+    "divisor": 131072,
+    "excitation_hz": 0.14901161193847656,
+    "original_80mhz_level": 18
+  },
+  {
+    "level": 18,
+    "divisor": 262144,
+    "excitation_hz": 0.07450580596923828,
+    "original_80mhz_level": 19
+  },
+  {
+    "level": 19,
+    "divisor": 524288,
+    "excitation_hz": 0.03725290298461914,
+    "original_80mhz_level": 20
+  },
+  {
+    "level": 20,
+    "divisor": 1048576,
+    "excitation_hz": 0.01862645149230957,
+    "original_80mhz_level": 21
+  },
+  {
+    "level": 21,
+    "divisor": 2097152,
+    "excitation_hz": 0.009313225746154785,
+    "original_80mhz_level": 22
+  },
+  {
+    "level": 22,
+    "divisor": 4194304,
+    "excitation_hz": 0.004656612873077393,
+    "original_80mhz_level": 23
+  },
+  {
+    "level": 23,
+    "divisor": 8388608,
+    "excitation_hz": 0.0023283064365386963,
+    "original_80mhz_level": null
+  }
+]

@@ -19,8 +19,13 @@
   "SYNTH_STRATEGY": "AREA 0",
 
   "//": "CLOCK_PERIOD - Increase this in case you are getting setup time violations.",
-  "//": "The value is in nanoseconds, so 12.5ns == 80MHz.",
-  "CLOCK_PERIOD": 12.5,
+  "//": "The value is in nanoseconds, so 25ns == 40MHz.",
+  "CLOCK_PERIOD": 25.0,
+  "//": "Keep the original absolute 2.5 ns IO delay budget at 40 MHz.",
+  "IO_DELAY_CONSTRAINT": 10,
+  "//": "Require setup and hold closure at all nine GF timing corners.",
+  "TIMING_VIOLATION_CORNERS": ["*"],
+  "HOLD_VIOLATION_CORNERS": ["*"],
 
   "//": "Hold slack margin - Increase them in case you are getting hold violations.",
   "PL_RESIZER_HOLD_SLACK_MARGIN": 0.5,

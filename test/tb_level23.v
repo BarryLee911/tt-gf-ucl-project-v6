@@ -5,7 +5,7 @@ module tb_level23;
     localparam integer DIVISOR = 8388608;
     localparam integer TERMINAL = 8388607;
     reg clk = 0;
-    always #6.25 clk = ~clk;
+    always #12.5 clk = ~clk;
     reg rst_n = 0, ena = 1, external_drive0 = 1;
     reg [7:0] adc = 128, external_data = 31;
     wire [7:0] data_out, io_out, io_oe, pads;
@@ -144,12 +144,12 @@ module tb_level23;
         if(!fd) $fatal(1,"Cannot write result");
         $fdisplay(fd,"{\"status\":\"PASS\",\"level\":23,\"divisor\":8388608,\"terminal\":8388607,");
         $fdisplay(fd,"\"cycles\":%0d,\"samples\":3,\"sample_edges_after_latch\":[8388608,16777216,25165824],",cycles);
-        $fdisplay(fd,"\"clock_period_ns\":12.5,\"sample_interval_ns\":104857600,\"all_pins_checked_every_cycle\":true,");
+        $fdisplay(fd,"\"clock_period_ns\":25.0,\"sample_interval_ns\":209715200,\"all_pins_checked_every_cycle\":true,");
         $fdisplay(fd,"\"forced_state\":false,\"reset_checks\":6,\"invalid_levels\":8,\"handoff_checks\":1,");
         $fdisplay(fd,"\"latch_checks\":3,\"pipeline_latency_checks\":\"PASS\",\"waveform\":\"event windows only; assertions always active\"}");
         $fclose(fd);
         $display("LEVEL23_PASS cycles=%0d samples=3 divisor=8388608 terminal=8388607 interval_checks=3",cycles);
         $finish;
     end
-    initial begin #400000000; $fatal(1,"Simulation-time timeout"); end
+    initial begin #800000000; $fatal(1,"Simulation-time timeout"); end
 endmodule
