@@ -1,0 +1,241 @@
+{
+  "status": "FAIL",
+  "baseline_commit": "dae89331466486dab23fe0605b45c979ee50ef03",
+  "build_commit": "0c8e6ac424eceeb1b391fa8fa2e5e6dc75200902",
+  "baseline_run": 35853433128,
+  "build_run": 37635756062,
+  "rtl_run": 37635756222,
+  "area_um2": {
+    "80": 314418.0,
+    "40": 310720.0
+  },
+  "worst_paths": {
+    "80": {
+      "startpoint": "sample_magnitude[2]",
+      "endpoint": "peak_second_position[5]",
+      "launch_clock_ns": 4.851515,
+      "data_arrival_ns": 23.727535,
+      "data_required_ns": 15.79398,
+      "launch_to_D_ns": 18.87602,
+      "slack_ns": -7.933555
+    },
+    "40": {
+      "startpoint": "sample_magnitude[2]",
+      "endpoint": "peak_second_position[5]",
+      "launch_clock_ns": 4.807762,
+      "data_arrival_ns": 32.359921,
+      "data_required_ns": 28.37458,
+      "launch_to_D_ns": 27.552159,
+      "slack_ns": -3.9853409999999982
+    }
+  },
+  "corners": [
+    {
+      "corner": "nom_tt_025C_3v30",
+      "setup_ns": 10.232250891758914,
+      "hold_ns": 1.0959742312787804,
+      "slew": 0.0,
+      "capacitance": 1.0,
+      "fanout": 103.0,
+      "baseline_setup_ns": 2.4424090108367764,
+      "baseline_hold_ns": 1.1087591159027352,
+      "setup_improvement_ns": 7.789841880922138
+    },
+    {
+      "corner": "nom_ss_125C_3v00",
+      "setup_ns": -3.2135415238410965,
+      "hold_ns": 0.523585190024113,
+      "slew": 196.0,
+      "capacitance": 1.0,
+      "fanout": 103.0,
+      "baseline_setup_ns": -7.547740424076341,
+      "baseline_hold_ns": 0.10924683689124666,
+      "setup_improvement_ns": 4.334198900235245
+    },
+    {
+      "corner": "nom_ff_n40C_3v60",
+      "setup_ns": 15.290350751659867,
+      "hold_ns": 0.507907508205381,
+      "slew": 0.0,
+      "capacitance": 1.0,
+      "fanout": 103.0,
+      "baseline_setup_ns": 6.142608373590947,
+      "baseline_hold_ns": 0.5062903573019759,
+      "setup_improvement_ns": 9.14774237806892
+    },
+    {
+      "corner": "min_tt_025C_3v30",
+      "setup_ns": 10.56752049110939,
+      "hold_ns": 1.0891066134988248,
+      "slew": 0.0,
+      "capacitance": 0.0,
+      "fanout": 103.0,
+      "baseline_setup_ns": 2.607088840826099,
+      "baseline_hold_ns": 1.1037937543069716,
+      "setup_improvement_ns": 7.96043165028329
+    },
+    {
+      "corner": "min_ss_125C_3v00",
+      "setup_ns": -2.564505125289227,
+      "hold_ns": 0.5216449642114047,
+      "slew": 150.0,
+      "capacitance": 0.0,
+      "fanout": 103.0,
+      "baseline_setup_ns": -7.257012973733565,
+      "baseline_hold_ns": 0.1681459463702312,
+      "setup_improvement_ns": 4.692507848444338
+    },
+    {
+      "corner": "min_ff_n40C_3v60",
+      "setup_ns": 15.495935639925353,
+      "hold_ns": 0.5069432794812239,
+      "slew": 0.0,
+      "capacitance": 0.0,
+      "fanout": 103.0,
+      "baseline_setup_ns": 6.202995626054226,
+      "baseline_hold_ns": 0.5051640360116392,
+      "setup_improvement_ns": 9.292940013871128
+    },
+    {
+      "corner": "max_tt_025C_3v30",
+      "setup_ns": 9.824646263505446,
+      "hold_ns": 1.1041514681756226,
+      "slew": 10.0,
+      "capacitance": 1.0,
+      "fanout": 103.0,
+      "baseline_setup_ns": 2.165281348841077,
+      "baseline_hold_ns": 1.0963217310953162,
+      "setup_improvement_ns": 7.659364914664369
+    },
+    {
+      "corner": "max_ss_125C_3v00",
+      "setup_ns": -3.985341947035921,
+      "hold_ns": 0.5282450182348586,
+      "slew": 240.0,
+      "capacitance": 1.0,
+      "fanout": 103.0,
+      "baseline_setup_ns": -7.933554482364606,
+      "baseline_hold_ns": 0.03882405617995117,
+      "setup_improvement_ns": 3.948212535328685
+    },
+    {
+      "corner": "max_ff_n40C_3v60",
+      "setup_ns": 15.043858140582882,
+      "hold_ns": 0.5090925602953815,
+      "slew": 0.0,
+      "capacitance": 1.0,
+      "fanout": 103.0,
+      "baseline_setup_ns": 6.069330099179556,
+      "baseline_hold_ns": 0.5076689212706414,
+      "setup_improvement_ns": 8.974528041403326
+    }
+  ],
+  "baseline_electrical": {
+    "nom_tt_025C_3v30": {
+      "setup_ns": 2.4424090108367764,
+      "hold_ns": 1.1087591159027352,
+      "slew": 0.0,
+      "capacitance": 1.0,
+      "fanout": 103.0
+    },
+    "nom_ss_125C_3v00": {
+      "setup_ns": -7.547740424076341,
+      "hold_ns": 0.10924683689124666,
+      "slew": 66.0,
+      "capacitance": 1.0,
+      "fanout": 103.0
+    },
+    "nom_ff_n40C_3v60": {
+      "setup_ns": 6.142608373590947,
+      "hold_ns": 0.5062903573019759,
+      "slew": 0.0,
+      "capacitance": 1.0,
+      "fanout": 103.0
+    },
+    "min_tt_025C_3v30": {
+      "setup_ns": 2.607088840826099,
+      "hold_ns": 1.1037937543069716,
+      "slew": 0.0,
+      "capacitance": 0.0,
+      "fanout": 103.0
+    },
+    "min_ss_125C_3v00": {
+      "setup_ns": -7.257012973733565,
+      "hold_ns": 0.1681459463702312,
+      "slew": 50.0,
+      "capacitance": 0.0,
+      "fanout": 103.0
+    },
+    "min_ff_n40C_3v60": {
+      "setup_ns": 6.202995626054226,
+      "hold_ns": 0.5051640360116392,
+      "slew": 0.0,
+      "capacitance": 0.0,
+      "fanout": 103.0
+    },
+    "max_tt_025C_3v30": {
+      "setup_ns": 2.165281348841077,
+      "hold_ns": 1.0963217310953162,
+      "slew": 0.0,
+      "capacitance": 1.0,
+      "fanout": 103.0
+    },
+    "max_ss_125C_3v00": {
+      "setup_ns": -7.933554482364606,
+      "hold_ns": 0.03882405617995117,
+      "slew": 68.0,
+      "capacitance": 1.0,
+      "fanout": 103.0
+    },
+    "max_ff_n40C_3v60": {
+      "setup_ns": 6.069330099179556,
+      "hold_ns": 0.5076689212706414,
+      "slew": 0.0,
+      "capacitance": 1.0,
+      "fanout": 103.0
+    }
+  },
+  "final_netlist_sha256": "e6feed0fcb2e1e3e1778a8560efa7f82dd7b8d74f5e31887d03646268874500c",
+  "source_sha256": "E070E8658952FF7314BFD6CE7E69E035233953CCCED5E57FA44714AE7D9F2FE2",
+  "date": "2026-10-07",
+  "branch": "codex/v6-gf40mhz",
+  "timing_pass": false,
+  "electrical_pass": false,
+  "rtl_pass": true,
+  "gate_functional_pass": true,
+  "gate_cycles": 460637,
+  "physical_checks": {
+    "magic__drc_error__count": 0.0,
+    "design__lvs_error__count": 0.0,
+    "route__drc_errors": 0.0,
+    "antenna__violating__nets": 0.0,
+    "antenna__violating__pins": 0.0
+  },
+  "archives": [
+    {
+      "path": "verification/cloud/GF40-GDS_logs.zip",
+      "bytes": 95812393,
+      "sha256": "35039cf8b87c53e0a0e93716226c656091a66ba9c4c4900f96b9f7623fb09007"
+    },
+    {
+      "path": "verification/cloud/GF40-GF40-assessment.zip",
+      "bytes": 17001,
+      "sha256": "aed1d2d0876ba4a2986aa7071a3aa80ef147867a328ad9b5fed14083d6bcdaec"
+    },
+    {
+      "path": "verification/cloud/GF40-RTL-test-results.zip",
+      "bytes": 71559,
+      "sha256": "0da0aa705b4e814ceb341726ad68ad46671b1c7411368c87c69461e5e758c3a7"
+    }
+  ],
+  "unperformed": [
+    "SDF timing simulation",
+    "TinyTapeout standalone precheck (CI skipped after build failure)",
+    "KLayout DRC (baseline flow does not run it)",
+    "All 24 gears with full 2048-sample windows",
+    "FPGA/ADC/analog chain",
+    "Pad/wrapper/package timing",
+    "Silicon verification"
+  ],
+  "original_source_unchanged": true
+}
